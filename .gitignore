@@ -1,2 +1,5 @@
 /.vscode
 /build
+empty-log.csv
+cookie-log.csv
+bad-log.csv

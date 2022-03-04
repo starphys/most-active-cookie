@@ -1,5 +1,4 @@
-#include <unordered_map>
 #include <fstream>
+#include "CLI11.hpp"
 
-std::unordered_map<std::string, int> *getCookiesFromDate(std::fstream &inputFile, std::string date);
-bool getCookieFromStringByDate(std::string input, std::string *cookie, std::string date);
+bool parseCommandLineInput(int args, char **argv, std::string *fileForInput, std::string *dateOfCookies);
