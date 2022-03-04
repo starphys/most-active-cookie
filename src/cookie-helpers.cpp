@@ -1,6 +1,6 @@
 #include "cookie-helpers.hpp"
 
-bool parseCommandLineInput(int args, char **argv, std::string *fileForInput, std::string *dateOfCookies)
+int parseCommandLineInput(int args, char **argv, std::string *fileForInput, std::string *dateOfCookies)
 {
     CLI::App app;
     bool date_flag{false};
@@ -11,12 +11,5 @@ bool parseCommandLineInput(int args, char **argv, std::string *fileForInput, std
 
     CLI11_PARSE(app, args, argv);
 
-    // Expect a .csv file for the first command
-    if (fileForInput->substr(fileForInput->length() - 4, fileForInput->length()) != ".csv")
-    {
-        std::cout << "This tool only works on .csv files, please enter a .csv file as the first argument" << std::endl;
-        return false;
-    }
-
-    return true;
+    return 0;
 }

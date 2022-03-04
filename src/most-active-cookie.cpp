@@ -4,17 +4,27 @@
 
 int main(int args, char **argv)
 {
-    // TODO: edge cases:
-    // Listed inline, also how to handle if date is empty? require date?
-    // Try/catch for bad file data
-    // TODO: Validate date format
-    // Will also need to check if date is within range from .csv
-
     // Parse command line input, requiring at least some string is specified. Will confirm that string is a .csv
     CookieMap cookieMap{};
     std::string fileFromCLI{}, dateFromCLI{};
-    if (!parseCommandLineInput(args, argv, &fileFromCLI, &dateFromCLI))
+    parseCommandLineInput(args, argv, &fileFromCLI, &dateFromCLI);
+
+    // Validate file string
+    if (fileFromCLI.empty())
     {
+        std::cout << "File name required, run with --help for more information." << std::endl;
+        return -1;
+    }
+    if (fileFromCLI.substr(fileFromCLI.length() - 4, fileFromCLI.length()) != ".csv")
+    {
+        std::cout << "This tool only works on .csv files, please enter a .csv file as the first argument" << std::endl;
+        return -1;
+    }
+
+    // Validate date string
+    if (dateFromCLI.empty())
+    {
+        std::cout << "Date required at this time, run with --help for more information." << std::endl;
         return -1;
     }
 
