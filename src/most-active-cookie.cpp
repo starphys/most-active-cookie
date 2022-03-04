@@ -1,20 +1,23 @@
 #include <iostream>
-#include "cookie-helpers.hpp"
+#include <fstream>
+#include "CLI11.hpp"
 #include "CookieMap.hpp"
 
 int main(int args, char **argv)
 {
-    // Parse command line input, requiring at least some string is specified. Will confirm that string is a .csv
     CookieMap cookieMap{};
     std::string fileFromCLI{}, dateFromCLI{};
-    parseCommandLineInput(args, argv, &fileFromCLI, &dateFromCLI);
+    CLI::App app;
+    bool date_flag{false};
+
+    // Parse command line input, requiring at least some string is specified. Will confirm that string is a .csv
+    app.add_option("file", fileFromCLI, "Only accepts .csv files at this time")->required();
+    CLI::Option *dOption = app.add_flag("-d", date_flag, "Flag followed by a date");
+    app.add_option("date", dateFromCLI, "Date following -d")->needs(dOption)->required();
+
+    CLI11_PARSE(app, args, argv);
 
     // Validate file string
-    if (fileFromCLI.empty())
-    {
-        std::cout << "File name required, run with --help for more information." << std::endl;
-        return -1;
-    }
     if (fileFromCLI.substr(fileFromCLI.length() - 4, fileFromCLI.length()) != ".csv")
     {
         std::cout << "This tool only works on .csv files, please enter a .csv file as the first argument" << std::endl;

@@ -3,23 +3,27 @@
 CookieMap::CookieMap() : cookiesFromDate{}, highestFrequency{1} {}
 CookieMap::~CookieMap() {}
 
-// Extracts cookie from a log line, stores it in a string and returns success or failure
+// Extracts cookie from a log line and stores it in a string.
 bool CookieMap::extractCookieString(std::string input, std::string *cookie, std::string date)
 {
+    // Format is 'cookie,dateTtime', get indexes to the comma and T
     auto commaIndex = input.find_first_of(',');
     auto timeIndex = input.find_first_of('T', commaIndex);
 
+    // If either index not found, reject this line
     if (commaIndex == std::string::npos || commaIndex == std::string::npos)
     {
         return false;
     }
 
+    // If the string between the comma and T matches the date string, extract the cookie
     if (input.substr(commaIndex + 1, (timeIndex - commaIndex - 1)) == date)
     {
         *cookie = input.substr(0, commaIndex);
         return true;
     }
 
+    // Line was valid but did not match the date string
     return false;
 }
 

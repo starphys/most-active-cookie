@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include "../src/cookie-helpers.hpp"
 #include "../src/CookieMap.hpp"
 
 // Test Suite: Correct output

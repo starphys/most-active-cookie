@@ -5,15 +5,11 @@ LANGUAGES CXX)
 
 add_executable(most-active-cookie
 src/most-active-cookie.cpp
-src/cookie-helpers.hpp
-src/cookie-helpers.cpp
 src/CookieMap.hpp
 src/CookieMap.cpp)
 
 add_library(most-active-cookie_lib
 src/most-active-cookie.cpp
-src/cookie-helpers.hpp
-src/cookie-helpers.cpp
 src/CookieMap.hpp
 src/CookieMap.cpp
 )
